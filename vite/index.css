@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --text: #6b6375;
+    --bg: #fff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #9ca3af;
+      --bg: #16171d;
+    }
+  }
+  body {
+    color: var(--text);
+    background: var(--bg);
+  }
+}

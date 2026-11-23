@@ -1,7 +1,9 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+from flask_vite import Vite
 
 app = Flask(__name__)
+vite = Vite(app)
 CORS(app)
 
 @app.route("/api/health")
