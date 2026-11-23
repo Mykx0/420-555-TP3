@@ -6,6 +6,7 @@ export default {
   server: {
     port: 3000,
     strictPort: true,
+    proxy: { "/api": "http://localhost:8080" }
   },
 
   resolve: {
@@ -13,6 +14,6 @@ export default {
       '@': '/src',
     }
   },
-  
+
   plugins: [react(), tailwindcss()],
 };
