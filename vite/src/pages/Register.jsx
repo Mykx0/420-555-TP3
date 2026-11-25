@@ -20,7 +20,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email, password: form.password }),
@@ -78,7 +78,7 @@ export default function Register() {
 
         {error && <p className="text-sm text-red-600">{error}</p>}
 
-        <button type="submit" disabled={loading} className="... disabled:opacity-50">
+        <button type="submit" disabled={loading} className="w-full rounded-md bg-indigo-600 py-2 font-medium text-white hover:bg-indigo-700 disabled:opacity-50">
           {loading ? "Creating..." : "Create account"}
         </button>
       </form>

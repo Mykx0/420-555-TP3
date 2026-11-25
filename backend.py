@@ -21,7 +21,7 @@ def register():
     if email is None or password is None: 
         return jsonify({"msg": "invalid form"}), 400
     
-    if not jsonBD.put({email, password}):
+    if not jsonBD.put(email, password):
         return jsonify({"msg": "email already in use"}), 409
     
     return jsonify({"msg": "account created successfully"}), 200
