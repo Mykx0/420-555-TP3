@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_vite import Vite
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import jsonBD 
 
 app = Flask(__name__)
 vite = Vite(app)
+app.config['JWT_SECRET_KEY'] = 'your_super_secret_key'  # Change in production
+jwt = JWTManager(app)
 CORS(app)
 
 @app.route("/api/health")
@@ -24,7 +27,7 @@ def register():
     if not jsonBD.put(email, password):
         return jsonify({"msg": "email already in use"}), 409
     
-    return jsonify({"msg": "account created successfully"}), 200
+    return jsonify({"token": create_access_token(identity=email)}), 200
     
 
 def start():
