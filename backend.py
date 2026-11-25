@@ -10,6 +10,12 @@ app.config['JWT_SECRET_KEY'] = 'your_super_secret_key'  # Change in production
 jwt = JWTManager(app)
 CORS(app)
 
+MIN_PIN_LENGTH = 4
+MAX_PIN_LENGTH = 6
+
+def valid_length(value, min_len, max_len):
+    return min_len <= len(value) <= max_len
+
 @app.route("/api/health")
 def health():
     return jsonify({"message": "Backend is healthy!"})
@@ -17,17 +23,23 @@ def health():
 @app.route('/api/register', methods=['POST'])
 def register():
     data = request.get_json()
-    email = data.get('email')
-    password = data.get('password')
-    print(email,password)
+    pin = data.get('pin')
+    passcode = data.get('passcode')
+    name = data.get('name')
     
-    if email is None or password is None: 
+    if pin is None or passcode is None or name is None: 
         return jsonify({"msg": "invalid form"}), 400
     
-    if not jsonBD.put(email, password):
+    if not valid_length(pin, MIN_PIN_LENGTH, MAX_PIN_LENGTH):
+        return jsonify({"msg": "invalid pin"}), 400
+    
+    if not valid_length(passcode, MIN_PIN_LENGTH, MAX_PIN_LENGTH):
+            return jsonify({"msg": "invalid passcode"}), 400
+    
+    if not jsonBD.put(pin, name, passcode):
         return jsonify({"msg": "email already in use"}), 409
     
-    return jsonify({"token": create_access_token(identity=email)}), 200
+    return jsonify({"token": create_access_token(identity=pin)}), 200
     
 
 def start():

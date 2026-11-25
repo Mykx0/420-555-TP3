@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api, { setToken } from "../api.js";
 
 export default function Register() {
-  const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" });
+  const [form, setForm] = useState({
+    name: "",
+    pin: "",
+    passcode: "",
+    confirmPasscode: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -12,29 +18,23 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.password !== form.confirm) {
-      setError("Passwords do not match.");
+    if (form.passcode !== form.confirmPasscode) {
+      setError("Pass codes do not match.");
       return;
     }
     setError("");
     setLoading(true);
 
     try {
-      const res = await fetch("api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: form.email, password: form.password }),
+      const { data } = await api.post("/register", {
+        name: form.name,
+        pin: form.pin,
+        passcode: form.passcode,
       });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.msg || "Registration failed.");
-        return;
-      }
-
-      navigate("/login");
-    } catch {
-      setError("Could not reach the server.");
+      setToken(data.token);
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data?.msg || "Could not reach the server.");
     } finally {
       setLoading(false);
     }
@@ -43,6 +43,7 @@ export default function Register() {
   const inputClass =
     "w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500";
   const labelClass = "mb-1 block text-sm font-medium text-gray-700";
+  const digits = { inputMode: "numeric", pattern: "\\d{4,6}", minLength: 4, maxLength: 6 };
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4">
@@ -53,32 +54,33 @@ export default function Register() {
         <h2 className="text-2xl font-bold text-gray-900">Register</h2>
 
         <div>
-          <label htmlFor="name" className={labelClass}>Name</label>
+          <label htmlFor="name" className={labelClass}>Enter your name</label>
           <input id="name" name="name" type="text" required
             value={form.name} onChange={handleChange} className={inputClass} />
         </div>
 
         <div>
-          <label htmlFor="email" className={labelClass}>Email</label>
-          <input id="email" name="email" type="email" required
-            value={form.email} onChange={handleChange} className={inputClass} />
+          <label htmlFor="pin" className={labelClass}>Enter a 4 to 6 digit PIN</label>
+          <input id="pin" name="pin" type="text" required {...digits}
+            placeholder="123456" value={form.pin} onChange={handleChange} className={inputClass} />
         </div>
 
         <div>
-          <label htmlFor="password" className={labelClass}>Password</label>
-          <input id="password" name="password" type="password" required minLength={6}
-            value={form.password} onChange={handleChange} className={inputClass} />
+          <label htmlFor="passcode" className={labelClass}>Enter a 4 to 6 digit pass code</label>
+          <input id="passcode" name="passcode" type="password" required {...digits}
+            placeholder="123456" value={form.passcode} onChange={handleChange} className={inputClass} />
         </div>
 
         <div>
-          <label htmlFor="confirm" className={labelClass}>Confirm password</label>
-          <input id="confirm" name="confirm" type="password" required
-            value={form.confirm} onChange={handleChange} className={inputClass} />
+          <label htmlFor="confirmPasscode" className={labelClass}>Confirm your pass code</label>
+          <input id="confirmPasscode" name="confirmPasscode" type="password" required {...digits}
+            placeholder="123456" value={form.confirmPasscode} onChange={handleChange} className={inputClass} />
         </div>
 
         {error && <p className="text-sm text-red-600">{error}</p>}
 
-        <button type="submit" disabled={loading} className="w-full rounded-md bg-indigo-600 py-2 font-medium text-white hover:bg-indigo-700 disabled:opacity-50">
+        <button type="submit" disabled={loading}
+          className="w-full rounded-md bg-indigo-600 py-2 font-medium text-white hover:bg-indigo-700 disabled:opacity-50">
           {loading ? "Creating..." : "Create account"}
         </button>
       </form>

@@ -23,16 +23,16 @@ def _save(data):
     os.replace(tmp, FILE)  # atomic: avoids a corrupted file if the app crashes mid-write
 
 
-def get(email):
+def get(pin):
     with _lock:
-        return _load().get(email)
+        return _load().get(pin)
 
 
-def put(email, password):
+def put(pin, name, passcode):
     with _lock:
         data = _load()
-        if email in data:
+        if pin in data:
             return False
-        data[email] = password
+        data[pin] = {"name" : name, "passcode": passcode}
         _save(data)
         return True
