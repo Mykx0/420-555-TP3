@@ -42,6 +42,21 @@ def register():
     return jsonify({"token": create_access_token(identity=pin)}), 200
     
 
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json(silent=True) or {}
+    pin = data.get('pin')
+    passcode = data.get('passcode')
+
+    if not isinstance(pin, str) or not isinstance(passcode, str):
+        return jsonify({"msg": "invalid form"}), 400
+
+    user = jsonBD.get(pin)
+    if user is None or not (user["passcode"] == passcode):
+        return jsonify({"msg": "invalid credentials"}), 401
+
+    return jsonify({"token": create_access_token(identity=pin)}), 200
+
 def start():
     print("Starting web server")
     app.run(port=8080, host='0.0.0.0', debug=True)
