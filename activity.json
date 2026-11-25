@@ -1,0 +1,12 @@
+{
+  "2026-11-25 01:59:43.118153": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in"
+  },
+  "2026-11-25 02:00:00.382302": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 000002 from 127.0.0.1"
+  }
+}

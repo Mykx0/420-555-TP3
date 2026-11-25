@@ -3,10 +3,11 @@ from flask_cors import CORS
 from flask_vite import Vite
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import jsonBD 
+import jsonLog
 
 app = Flask(__name__)
 vite = Vite(app)
-app.config['JWT_SECRET_KEY'] = 'your_super_secret_key'  # Change in production
+app.config['JWT_SECRET_KEY'] = 'your_super_secret_key'
 jwt = JWTManager(app)
 CORS(app)
 
@@ -36,9 +37,11 @@ def register():
     if not valid_length(passcode, MIN_PIN_LENGTH, MAX_PIN_LENGTH):
             return jsonify({"msg": "invalid passcode"}), 400
     
-    if not jsonBD.put(pin, name, passcode):
-        return jsonify({"msg": "email already in use"}), 409
+    if not jsonBD.put(pin, name.strip(), passcode):
+        jsonLog.warning("register", f"pin {pin} already in use")
+        return jsonify({"msg": "pin already in use"}), 409
     
+    jsonLog.info("register", f"user created: pin={pin}, name={name.strip()}")
     return jsonify({"token": create_access_token(identity=pin)}), 200
     
 
@@ -53,8 +56,10 @@ def login():
 
     user = jsonBD.get(pin)
     if user is None or not (user["passcode"] == passcode):
+        jsonLog.warning("login", f"failed attempt for pin {pin} from {request.remote_addr}")
         return jsonify({"msg": "invalid credentials"}), 401
 
+    jsonLog.info("login", f"pin {pin} logged in")
     return jsonify({"token": create_access_token(identity=pin)}), 200
 
 def start():
