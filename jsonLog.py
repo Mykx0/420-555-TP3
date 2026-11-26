@@ -6,6 +6,13 @@ from datetime import datetime
 FILE = os.path.join(os.path.dirname(__file__), "activity.json")
 _lock = threading.Lock()
 
+def get_all():
+    with _lock:
+        data = _load()
+    return [
+        {"timestamp": ts, **entry}
+        for ts, entry in sorted(data.items(), reverse=True)
+    ]
 
 def _load():
     if not os.path.exists(FILE):

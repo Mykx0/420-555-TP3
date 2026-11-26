@@ -62,6 +62,11 @@ def login():
     jsonLog.info("login", f"pin {pin} logged in")
     return jsonify({"token": create_access_token(identity=pin)}), 200
 
+@app.route("/api/logs")
+@jwt_required()
+def logs():
+    return jsonify(jsonLog.get_all()), 200
+
 def start():
     print("Starting web server")
     app.run(port=8080, host='0.0.0.0', debug=True)

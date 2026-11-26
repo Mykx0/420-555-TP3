@@ -8,5 +8,25 @@
     "level": "WARNING",
     "action": "login",
     "message": "failed attempt for pin 000002 from 127.0.0.1"
+  },
+  "2026-11-25 22:42:39.839241": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in"
+  },
+  "2026-11-25 22:55:05.814395": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in"
+  },
+  "2026-11-26 09:21:51.324789": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in"
+  },
+  "2026-11-26 09:24:35.511623": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in"
   }
 }

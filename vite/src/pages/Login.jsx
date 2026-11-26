@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api, { setToken } from "../api.js";
+import api from "../api.js";
+import { useAuth } from "../AuthContext.jsx";
 
 export default function Login() {
   const [form, setForm] = useState({ pin: "", passcode: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,7 +23,7 @@ export default function Login() {
         pin: form.pin,
         passcode: form.passcode,
       });
-      setToken(data.token);
+      login(data.token)
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.msg || "Could not reach the server.");
