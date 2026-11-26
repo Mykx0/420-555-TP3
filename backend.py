@@ -1,3 +1,4 @@
+import threading
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_vite import Vite
@@ -68,6 +69,14 @@ def logs():
     return jsonify(jsonLog.get_all()), 200
 
 def start():
-    print("Starting web server")
-    app.run(port=8080, host='0.0.0.0', debug=True)
-    print("Server has finished loading")
+    thread = threading.Thread(
+        target=lambda: app.run(
+            port=8080,
+            host="127.0.0.1",
+            debug=False,
+            use_reloader=False,
+        ),
+        daemon=True,
+    )
+    thread.start()
+    print("Web server started on port 8080")

@@ -7,3 +7,4 @@ lib64
 pyvenv.cfg
 node_modules
 users.json
+activity.json
