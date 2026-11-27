@@ -108,5 +108,110 @@
     "level": "INFO",
     "action": "Safe login",
     "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 23:40:48.356144": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 23:41:18.973848": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 7777 from keypad"
+  },
+  "2026-11-26 23:41:19.069907": {
+    "level": "WARNING",
+    "action": "Safe login",
+    "message": "Someone tried opening the safe with 7777"
+  },
+  "2026-11-26 23:43:52.546224": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 1111 from keypad"
+  },
+  "2026-11-26 23:43:52.690163": {
+    "level": "WARNING",
+    "action": "Safe login",
+    "message": "Someone tried opening the safe with 1111"
+  },
+  "2026-11-26 23:44:02.098887": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 23:48:59.836233": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 23:59:10.836957": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 23:59:12.300400": {
+    "level": "INFO",
+    "action": "safe",
+    "message": "safe opened"
+  },
+  "2026-11-26 23:59:20.830847": {
+    "level": "WARNING",
+    "action": "safe",
+    "message": "safe open too long"
+  },
+  "2026-11-26 23:59:31.459708": {
+    "level": "WARNING",
+    "action": "safe",
+    "message": "safe closed after being open too long"
+  },
+  "2026-11-26 23:59:42.232520": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 23:59:43.646078": {
+    "level": "INFO",
+    "action": "safe",
+    "message": "safe opened"
+  },
+  "2026-11-26 23:59:44.133180": {
+    "level": "INFO",
+    "action": "safe",
+    "message": "safe closed"
+  },
+  "2026-11-27 00:02:42.819461": {
+    "level": "INFO",
+    "action": "ble",
+    "message": "connected to ESP32"
+  },
+  "2026-11-27 00:02:45.279487": {
+    "level": "WARNING",
+    "action": "ble",
+    "message": "connection to ESP32 lost"
+  },
+  "2026-11-27 00:02:48.177759": {
+    "level": "INFO",
+    "action": "ble",
+    "message": "connected to ESP32"
+  },
+  "2026-11-27 00:02:58.220635": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-27 00:02:59.634120": {
+    "level": "INFO",
+    "action": "safe",
+    "message": "safe opened"
+  },
+  "2026-11-27 00:03:08.214197": {
+    "level": "WARNING",
+    "action": "safe",
+    "message": "safe open too long"
+  },
+  "2026-11-27 00:03:14.161787": {
+    "level": "WARNING",
+    "action": "safe",
+    "message": "safe closed after being open too long"
   }
 }
