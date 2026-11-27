@@ -18,6 +18,17 @@ MAX_PIN_LENGTH = 6
 def valid_length(value, min_len, max_len):
     return min_len <= len(value) <= max_len
 
+def check_login(pin, passcode, source):
+    if not isinstance(pin, str) or not isinstance(passcode, str):
+        return False
+
+    user = jsonBD.get(pin)
+    if user is None or user["passcode"] != passcode:
+        jsonLog.warning("login", f"failed attempt for pin {pin} from {source}")
+        return False
+
+    return True
+
 @app.route("/api/health")
 def health():
     return jsonify({"message": "Backend is healthy!"})
@@ -55,12 +66,10 @@ def login():
     if not isinstance(pin, str) or not isinstance(passcode, str):
         return jsonify({"msg": "invalid form"}), 400
 
-    user = jsonBD.get(pin)
-    if user is None or not (user["passcode"] == passcode):
-        jsonLog.warning("login", f"failed attempt for pin {pin} from {request.remote_addr}")
+    if not check_login(pin, passcode, request.remote_addr):
         return jsonify({"msg": "invalid credentials"}), 401
 
-    jsonLog.info("login", f"pin {pin} logged in")
+    jsonLog.info("web login", f"pin {pin} logged in from {request.remote_addr}")
     return jsonify({"token": create_access_token(identity=pin)}), 200
 
 @app.route("/api/logs")

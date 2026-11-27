@@ -28,5 +28,85 @@
     "level": "INFO",
     "action": "login",
     "message": "pin 1234 logged in"
+  },
+  "2026-11-26 21:44:19.531738": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in"
+  },
+  "2026-11-26 21:44:43.570756": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 9999 from 127.0.0.1"
+  },
+  "2026-11-26 22:09:55.284357": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 1234 from keypad"
+  },
+  "2026-11-26 22:09:55.430002": {
+    "level": "INFO",
+    "action": "Safe Open",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 22:10:03.622435": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in from keypad"
+  },
+  "2026-11-26 22:10:03.718532": {
+    "level": "INFO",
+    "action": "Safe Open",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 22:10:42.378330": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 999978 from keypad"
+  },
+  "2026-11-26 22:10:42.523388": {
+    "level": "INFO",
+    "action": "Safe Open",
+    "message": "The safe has been opened by 999978"
+  },
+  "2026-11-26 22:13:13.603410": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in from keypad"
+  },
+  "2026-11-26 22:13:13.699091": {
+    "level": "INFO",
+    "action": "Safe Open",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 22:13:32.035693": {
+    "level": "INFO",
+    "action": "login",
+    "message": "pin 1234 logged in from keypad"
+  },
+  "2026-11-26 22:13:32.132438": {
+    "level": "INFO",
+    "action": "Safe open",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 22:13:42.275451": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 3333 from keypad"
+  },
+  "2026-11-26 22:13:42.419615": {
+    "level": "WARNING",
+    "action": "Safe open",
+    "message": "Someone tried opening the safe with 3333"
+  },
+  "2026-11-26 23:08:50.324794": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-26 23:35:00.131472": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
   }
 }
