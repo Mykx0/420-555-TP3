@@ -2,6 +2,7 @@ import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Logs from "./pages/Logs.jsx";
+import ChangePasscode from "./pages/ChangePasscode.jsx";
 import RequireAuth from "./RequireAuth.jsx";
 import { useAuth } from "./AuthContext.jsx";
 import "./App.css";
@@ -28,6 +29,9 @@ function App() {
                 >
                   Logout
                 </button>
+                <Link to="/account" className="rounded-md px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                  Change passcode
+                </Link>
               </>
             ) : (
               <>
@@ -48,6 +52,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/logs" element={<RequireAuth><Logs /></RequireAuth>} />
+        <Route path="/account" element={<RequireAuth><ChangePasscode /></RequireAuth>} />
       </Routes>
     </>
   );

@@ -89,3 +89,32 @@ def start():
     )
     thread.start()
     print("Web server started on port 8080")
+
+@app.route("/api/change-passcode", methods=["POST"])
+@jwt_required()
+def change_passcode():
+    pin = get_jwt_identity()
+    data = request.get_json(silent=True) or {}
+    current = data.get("current")
+    new = data.get("new")
+
+    if not isinstance(current, str) or not isinstance(new, str):
+        return jsonify({"msg": "invalid form"}), 400
+
+    if not (new.isdigit() and MIN_PIN_LENGTH <= len(new) <= MAX_PIN_LENGTH):
+        return jsonify({"msg": "new passcode must be 4 to 6 digits"}), 400
+
+    user = jsonBD.get(pin)
+    if user is None:
+        return jsonify({"msg": "user not found"}), 404
+
+    if user["passcode"] != current:
+        jsonLog.warning("passcode", f"pin {pin}: change refused, wrong current passcode")
+        return jsonify({"msg": "current passcode is incorrect"}), 403   # not 401, see notes
+
+    if new == current:
+        return jsonify({"msg": "new passcode must be different"}), 400
+
+    jsonBD.set_passcode(pin, new)
+    jsonLog.info("passcode", f"pin {pin} changed their passcode")
+    return jsonify({"msg": "passcode updated"}), 200

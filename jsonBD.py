@@ -36,3 +36,12 @@ def put(pin, name, passcode):
         data[pin] = {"name" : name, "passcode": passcode}
         _save(data)
         return True
+    
+def set_passcode(pin, new_passcode):
+    with _lock:
+        data = _load()
+        if pin not in data:
+            return False
+        data[pin]["passcode"] = new_passcode
+        _save(data)
+        return True

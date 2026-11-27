@@ -213,5 +213,50 @@
     "level": "WARNING",
     "action": "safe",
     "message": "safe closed after being open too long"
+  },
+  "2026-11-27 00:12:02.487940": {
+    "level": "INFO",
+    "action": "web login",
+    "message": "pin 1234 logged in from 127.0.0.1"
+  },
+  "2026-11-27 00:12:32.143637": {
+    "level": "INFO",
+    "action": "ble",
+    "message": "connected to ESP32"
+  },
+  "2026-11-27 00:12:45.004208": {
+    "level": "INFO",
+    "action": "passcode",
+    "message": "pin 1234 changed their passcode"
+  },
+  "2026-11-27 00:12:55.834013": {
+    "level": "INFO",
+    "action": "Safe login",
+    "message": "The safe has been opened by 1234"
+  },
+  "2026-11-27 00:12:57.248421": {
+    "level": "INFO",
+    "action": "safe",
+    "message": "safe opened"
+  },
+  "2026-11-27 00:12:58.174821": {
+    "level": "INFO",
+    "action": "safe",
+    "message": "safe closed"
+  },
+  "2026-11-27 00:13:01.979688": {
+    "level": "WARNING",
+    "action": "login",
+    "message": "failed attempt for pin 1234 from keypad"
+  },
+  "2026-11-27 00:13:02.074794": {
+    "level": "WARNING",
+    "action": "Safe login",
+    "message": "Someone tried opening the safe with 1234"
+  },
+  "2026-11-27 00:13:11.552940": {
+    "level": "INFO",
+    "action": "passcode",
+    "message": "pin 1234 changed their passcode"
   }
 }
